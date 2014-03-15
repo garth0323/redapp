@@ -40,7 +40,6 @@ class PostsController < ApplicationController
   end
 
   def vote
-    binding.pry
     Vote.create(voteable: @post, user: current_user, vote: params[:vote])
     redirect_to posts_path
   end
