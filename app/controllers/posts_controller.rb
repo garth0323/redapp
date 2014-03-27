@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :vote]
-  before_action :require_user, except: [:show, :index, :vote]
+  before_action :require_user, except: [:show, :index]
 
   def index
   	@posts = Post.all
@@ -41,6 +41,7 @@ class PostsController < ApplicationController
 
   def vote
     Vote.create(voteable: @post, user: current_user, vote: params[:vote])
+    flash[:notice] = "Your vote counts here!"
     redirect_to posts_path
   end
 
